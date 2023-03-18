@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+    <style>
+        body {
+            background: linear-gradient(brown, gray, purple, brown);
+
+        }
+
+        .rps-main {
+            width: 800px;
+            height: 500px;
+            border: 15px solid springgreen;
+            background-color: black;
+            margin-left: 24%;
+            margin-top: 5%;
+            color: white;
+            text-align: center;
+
+        }
+
+        .rps-main-head {
+            margin: 0px;
+            margin-top: 5px;
+            color: yellow;
+        }
+
+        .rps-sub-head {
+            margin: 0px;
+            margin-top: 11px;
+            color: springgreen;
+        }
+
+        .rps-you {
+            width: 300px;
+            height: 200px;
+            border: 2px solid springgreen;
+            position: absolute;
+            margin-left: 60px;
+            margin-top: 50px;
+        }
+
+        .rps-computer {
+            width: 300px;
+            height: 200px;
+            border: 2px solid springgreen;
+            margin-left: 440px;
+            margin-top: 50px;
+        }
+
+        .rps-score {
+
+            width: 300px;
+            height: 33px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            background-color: springgreen;
+            color: black;
+            font-weight: 600;
+
+        }
+
+        .ins-msg {
+
+            margin-top: 26px;
+            display: block;
+            color: springgreen;
+
+        }
+
+        .choice-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .choice-img:hover {
+            border: 6px solid yellow;
+        }
+
+        .choice-btn {
+            border-radius: 50%;
+            background-color: black;
+            margin-right: 60px;
+            margin-left: 10px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+
+        }
+
+        .you-img {
+            width: 1500px;
+            width: 150px;
+        }
+
+        .inner-img-span {
+            margin-top: 10px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rps-main">
+        <h1 class="rps-main-head">Rock Paper Scissors</h1>
+        <h2 class="rps-sub-head">Play and enjoy!</h2>
+        <div class="rps-you">
+            <span class="rps-score" id="player-points">You: </span>
+            <span class="inner-img-span"><img src="rock.png" alt="" class="you-img" id="player-img"></span>
+        </div>
+        <div class="rps-computer">
+            <span class="rps-score" id="computer-points">Computer: </span>
+            <span class="inner-img-span"><img src="rock.png" alt="" class="you-img" style="transform: scaleX(-1);"
+                    id="computer-img"></span>
+        </div>
+        <span class="ins-msg">
+            <h2 id="ins-msg-id"> Choose Your Choice</h2>
+        </span>
+        <button class="choice-btn" onclick="rock_btn()"><img src="rock.png" alt="" class="choice-img"
+                id="rock-btn"></button>
+        <button class="choice-btn" onclick="paper_btn()"><img src="paper.png" alt="" class="choice-img"
+                id="paper-btn"></button>
+        <button class="choice-btn"><img src="scissors.png" alt="" class="choice-img" id="scissors-btn"></button>
+    </div>
+
+    <script>
+       
+
+        let pl_s = 0;
+        let com_s = 0;
+        function wining(p_img, s_img, ins_msg, player_points_span,
+            computer_points_span) {
+            let src_img = "http://127.0.0.1:5500/";
+
+
+            if (p_img.src == src_img + "rock.png" && s_img.src == src_img + "scissors.png") {
+                let win_audio = new Audio("yw.mp3");
+                win_audio.play();
+                ins_msg.innerHTML = "You win";
+                pl_s++;
+                player_points_span.innerHTML = "You: " + pl_s;
+
+
+            }
+            else if (p_img.src == src_img + "rock.png" && s_img.src == src_img + "paper.png") {
+                let win_audio = new Audio("yl.mp3");
+                win_audio.play();
+                ins_msg.innerHTML = "Computer win";
+                com_s++;
+                computer_points_span.innerHTML = "Computer: " + com_s;
+            }
+            else if (p_img.src == src_img + "paper.png" && s_img.src == src_img + "rock.png") {
+                let win_audio = new Audio("yw.mp3");
+                win_audio.play();
+                ins_msg.innerHTML = "You win";
+                pl_s++;
+                player_points_span.innerHTML = "You: " + pl_s;
+            }
+            else if (p_img.src == src_img + "paper.png" && s_img.src == src_img + "scissors.png") {
+                let win_audio = new Audio("yl.mp3");
+                win_audio.play();
+                ins_msg.innerHTML = "Computer win";
+                com_s++;
+                computer_points_span.innerHTML = "Computer: " + com_s;
+            }
+            else if (p_img.src == src_img + "scissors.png" && s_img.src == src_img + "paper.png") {
+                let win_audio = new Audio("yw.mp3");
+                win_audio.play();
+                ins_msg.innerHTML = "You win";
+                pl_s++;
+                player_points_span.innerHTML = "You: " + pl_s;
+
+            }
+            else if (p_img.src == src_img + "scissors.png" && s_img.src == src_img + "rock.png") {
+                let win_audio = new Audio("yl.mp3");
+                win_audio.play();
+                ins_msg.innerHTML = "Computer win";
+                com_s++;
+
+
+                computer_points_span.innerHTML = "Computer: " + com_s;
+            }
+            else if (p_img.src == s_img.src) {
+                ins_msg.innerHTML = "Match Draw";
+                let win_audio = new Audio("go.wav");
+                win_audio.play();
+
+            }
+
+
+
+        }
+
+        function rock_btn() {
+            let p_img = document.getElementById("player-img");
+            let s_img = document.getElementById("computer-img");
+            let ins_msg = document.getElementById("ins-msg-id");
+            let player_points_span = document.getElementById("player-points")
+            let computer_points_span = document.getElementById("computer-points")
+
+            p_img.src = "rock.png";
+            let sys_random = Math.floor(1 + (Math.random() * 3));
+            if (sys_random == 1) {
+                s_img.src = "rock.png";
+
+            }
+            else if (sys_random == 2) {
+                s_img.src = "paper.png";
+            }
+            else if (sys_random == 3) {
+                s_img.src = "scissors.png";
+            }
+
+            wining(p_img, s_img, ins_msg,
+                player_points_span, computer_points_span);
+
+        }
+        function paper_btn() {
+            let p_img = document.getElementById("player-img");
+            let s_img = document.getElementById("computer-img");
+            let ins_msg = document.getElementById("ins-msg-id");
+            let player_points_span = document.getElementById("player-points")
+            let computer_points_span = document.getElementById("computer-points")
+
+            p_img.src = "paper.png";
+            let sys_random = Math.floor(1 + (Math.random() * 3));
+            if (sys_random == 1) {
+                s_img.src = "rock.png";
+
+            }
+            else if (sys_random == 2) {
+                s_img.src = "paper.png";
+            }
+            else if (sys_random == 3) {
+                s_img.src = "scissors.png";
+            }
+
+            wining(p_img, s_img, ins_msg,
+                player_points_span, computer_points_span);
+
+        }
+        document.getElementById("scissors-btn").addEventListener("click", function scissors_btn() {
+            let p_img = document.getElementById("player-img");
+            let s_img = document.getElementById("computer-img");
+            let ins_msg = document.getElementById("ins-msg-id");
+            let player_points_span = document.getElementById("player-points")
+            let computer_points_span = document.getElementById("computer-points")
+
+            p_img.src = "scissors.png";
+            let sys_random = Math.floor(1 + (Math.random() * 3));
+            if (sys_random == 1) {
+                s_img.src = "rock.png";
+
+            }
+            else if (sys_random == 2) {
+                s_img.src = "paper.png";
+            }
+            else if (sys_random == 3) {
+                s_img.src = "scissors.png";
+            }
+
+            wining(p_img, s_img, ins_msg,
+                player_points_span, computer_points_span);
+            console.log("computer score = " + com_s);
+        })
+
+    </script>
+</body>
+
+</html>
